@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>K S Sooraj — UI/UX Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #121212;
+    --bg-card:   #1a1a2e;
+    --bg-card-2: #16213e;
+    --border:    #2a2a4a;
+    --text:      #e8e8f0;
+    --text-muted:#9090b0;
+    --cyan:      #00e5ff;
+    --green:     #69ff47;
+    --grad-start:#e040fb;
+    --grad-end:  #7c4dff;
+    --grad:      linear-gradient(135deg, #e040fb, #7c4dff);
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans:  'DM Sans', sans-serif;
+    --nav-h: 64px;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.7; overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: var(--nav-h);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw;
+    background: rgba(18,18,18,0.92);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: var(--sans); font-size: 1.1rem; font-weight: 500; color: var(--text); text-decoration: none; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--cyan); }
+
+  /* HERO */
+  #hero {
+    min-height: 100svh; padding-top: var(--nav-h);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+    position: relative; overflow: hidden;
+    background: linear-gradient(180deg, #1a0a2e 0%, #2d1b4e 25%, #1a2040 55%, #0d1a3a 80%, #121212 100%);
+  }
+  .hero-bg-img {
+    position: absolute; inset: 0;
+    background: url('https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1650&q=80') center 30%/cover;
+    opacity: 0.18; mix-blend-mode: screen;
+  }
+  .hero-profile {
+    width: 110px; height: 110px; border-radius: 50%;
+    border: 3px solid transparent;
+    background: linear-gradient(var(--bg-card), var(--bg-card)) padding-box, var(--grad) border-box;
+    overflow: hidden; margin: 0 auto 2rem; position: relative; z-index: 2;
+  }
+  .hero-profile img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .hero-content { position: relative; z-index: 2; padding: 0 2rem; max-width: 680px; }
+  .hero-title { font-family: var(--sans); font-size: clamp(2rem,5vw,3.2rem); font-weight: 500; line-height: 1.2; color: #fff; margin-bottom: 1.25rem; }
+  .hero-sub { font-size: 1rem; color: rgba(232,232,240,0.7); max-width: 500px; margin: 0 auto 2rem; line-height: 1.75; }
+  .btn-grad {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--grad); color: #fff;
+    font-family: var(--sans); font-size: 0.88rem; font-weight: 500;
+    padding: 0.75rem 2rem; border-radius: 30px; text-decoration: none; border: none; cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s; letter-spacing: 0.02em;
+  }
+  .btn-grad:hover { opacity: 0.85; transform: translateY(-2px); }
+
+  /* SHARED */
+  section { padding: 5.5rem 5vw; }
+  .section-label {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+    background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    margin-bottom: 0.5rem;
+  }
+  .section-title { font-family: var(--serif); font-size: clamp(1.8rem,3vw,2.6rem); line-height: 1.15; color: var(--text); margin-bottom: 0.9rem; }
+  .section-body { color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; max-width: 560px; }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 0 5vw; }
+
+  /* ABOUT */
+  #about { background: var(--bg); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 5vw; align-items: center; max-width: 1000px; }
+  .about-img-wrap { aspect-ratio: 4/5; border-radius: 8px; overflow: hidden; position: relative; border: 1px solid var(--border); }
+  .about-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .about-img-badge {
+    position: absolute; bottom: 1rem; right: 1rem;
+    background: var(--grad); color: #fff;
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.4rem 0.9rem; border-radius: 30px;
+  }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+  .stat-num {
+    font-family: var(--serif); font-size: 1.9rem; line-height: 1;
+    background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    margin-bottom: 0.2rem;
+  }
+  .stat-label { font-size: 0.78rem; color: var(--text-muted); }
+
+  /* SKILLS */
+  #skills { background: var(--bg-card); }
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-top: 3rem;
+  }
+  .skill-cell { background: var(--bg-card-2); padding: 1.75rem 1.5rem; transition: background 0.2s; }
+  .skill-cell:hover { background: #1e1e40; }
+  .skill-icon { font-size: 1.3rem; margin-bottom: 0.75rem; display: block; }
+  .skill-name { font-size: 1rem; font-weight: 500; color: var(--cyan); margin-bottom: 0.35rem; }
+  .skill-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+  .tech-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2.5rem; padding-top: 2.5rem; border-top: 1px solid var(--border); }
+  .tech-tag { font-size: 0.78rem; color: var(--text-muted); border: 1px solid var(--border); padding: 0.35rem 1rem; border-radius: 30px; transition: all 0.2s; }
+  .tech-tag:hover { color: var(--cyan); border-color: var(--cyan); }
+
+  /* ACHIEVEMENTS */
+  #achievements { background: var(--bg); }
+  .achievements-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; margin-top: 3rem; }
+  .ach-card {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 1.75rem 1.5rem;
+    transition: transform 0.2s, border-color 0.2s; position: relative; overflow: hidden;
+  }
+  .ach-card:hover { transform: translateY(-3px); border-color: #7c4dff; }
+  .ach-icon { font-size: 1.5rem; margin-bottom: 0.9rem; display: block; }
+  .ach-title { font-size: 1rem; font-weight: 500; color: var(--cyan); margin-bottom: 0.45rem; }
+  .ach-body { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; }
+
+  /* RESUME */
+  #resume { background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .resume-box {
+    border-radius: 10px; padding: 2.5rem;
+    max-width: 680px;
+    background: var(--bg-card-2);
+    border: 1px solid #7c4dff;
+    position: relative;
+    box-shadow: 0 0 40px rgba(124,77,255,0.15);
+  }
+  #resume .section-body { margin-bottom: 1.75rem; }
+
+  /* PROJECTS */
+  #projects { background: var(--bg); }
+  .projects-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.25rem; margin-top: 3rem; }
+  .project-card {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s; text-decoration: none; display: block;
+  }
+  .project-card:hover { transform: translateY(-3px); border-color: #7c4dff; }
+  .proj-img-wrap { height: 220px; overflow: hidden; position: relative; }
+  .proj-mockup { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+  .screenshot-placeholder {
+    width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.75rem; color: var(--text-muted); font-size: 2rem; background: linear-gradient(135deg, rgba(30,30,50,0.8), rgba(20,20,40,0.8));
+  }
+  .screenshot-placeholder-text { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
+  .proj-overlay {
+    position: absolute; inset: 0; background: rgba(18,18,30,0.65);
+    display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s;
+  }
+  .project-card:hover .proj-overlay { opacity: 1; }
+  .proj-overlay-btn {
+    background: var(--grad); color: #fff;
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 0.6rem 1.4rem; border-radius: 30px; text-decoration: none;
+  }
+  .proj-body { padding: 1.25rem 1.5rem 1.5rem; }
+  .proj-tag { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.4rem; }
+  .proj-title { font-size: 1rem; font-weight: 500; color: var(--green); margin-bottom: 0.5rem; line-height: 1.35; }
+  .proj-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 0.9rem; }
+  .proj-meta { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+  .proj-pill { font-size: 0.7rem; color: var(--text-muted); border: 1px solid var(--border); padding: 0.2rem 0.7rem; border-radius: 30px; }
+  .proj-link { display: inline-block; margin-top: 0.75rem; font-size: 0.8rem; font-weight: 500; color: var(--cyan); text-decoration: none; transition: color 0.2s; }
+  .proj-link:hover { color: #e040fb; }
+
+  .mockup-fittea  { background: linear-gradient(135deg, #1a2a1a, #0d1a0d); }
+  .mockup-ecom    { background: linear-gradient(135deg, #1a1a35, #0d1020); }
+  .mockup-premia  { background: linear-gradient(135deg, #1a1408, #0d0c08); }
+  .mockup-wp      { background: linear-gradient(135deg, #1a1530, #0f0e25); }
+
+  /* CONTACT */
+  #contact { background: var(--bg-card); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5vw; align-items: start; max-width: 900px; margin-top: 3rem; }
+  .avail-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--green); background: rgba(105,255,71,0.1); padding: 0.35rem 0.9rem; border-radius: 30px; margin-bottom: 1.25rem; }
+  .avail-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.75)} }
+  .contact-info-body { font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 1.75rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
+  .contact-link { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); font-size: 0.9rem; transition: color 0.2s; }
+  .contact-link:hover { color: var(--cyan); }
+  .contact-link-icon { width: 34px; height: 34px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg-card-2); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; flex-shrink: 0; }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-label { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+  .form-input, .form-textarea { font-family: var(--sans); font-size: 0.95rem; color: var(--text); background: var(--bg-card-2); border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem 1rem; outline: none; resize: none; transition: border-color 0.2s; }
+  .form-input:focus, .form-textarea:focus { border-color: #7c4dff; }
+  .form-submit { background: var(--grad); color: #fff; font-family: var(--sans); font-size: 0.88rem; font-weight: 500; border: none; padding: 0.85rem 2rem; border-radius: 30px; cursor: pointer; align-self: stretch; transition: opacity 0.2s; letter-spacing: 0.02em; }
+  .form-submit:hover { opacity: 0.85; }
+
+  /* FOOTER */
+  footer { background: #0c0c12; color: var(--text-muted); font-size: 0.8rem; padding: 1.25rem 5vw; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); }
+
+  /* ANIM */
+  .fade-up { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .achievements-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">K S Sooraj</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#resume">Resume</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-img"></div>
+  <div class="hero-profile">
+    <img src="https://sooraj123kss.github.io/portfolio1/profile.png" alt="K S Sooraj"/>
+  </div>
+  <div class="hero-content">
+    <h1 class="hero-title">UI/UX Designer &amp; Frontend Developer</h1>
+    <p class="hero-sub">I craft clean, minimalist, and intuitive digital experiences that blend beautiful design with smooth functionality.</p>
+    <a href="#projects" class="btn-grad">Explore My Work →</a>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-img-wrap fade-up">
+      <img src="https://sooraj123kss.github.io/portfolio1/profile.png" alt="K S Sooraj"/>
+      <div class="about-img-badge">Based in India</div>
+    </div>
+    <div class="fade-up">
+      <div class="section-label">About Me</div>
+      <h2 class="section-title">Designer who thinks in systems, not screens.</h2>
+      <p class="section-body">Hello! I am a passionate UI/UX Designer and Frontend Developer with a strong focus on creating visually stunning and user-friendly digital experiences. I believe good design solves a problem <em>and</em> leaves an impression.</p>
+      <p class="section-body" style="margin-top:1rem;">Beyond the screen, I'm a published author, certified designer, and technical writer — bringing both visual instinct and clear communication to every project.</p>
+      <div class="about-stats">
+        <div><div class="stat-num">4+</div><div class="stat-label">Projects delivered</div></div>
+        <div><div class="stat-num">2</div><div class="stat-label">Industry certifications</div></div>
+        <div><div class="stat-num">KDP</div><div class="stat-label">Published author</div></div>
+        <div><div class="stat-num">2</div><div class="stat-label">Active design blogs</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label fade-up">Skills &amp; Expertise</div>
+  <h2 class="section-title fade-up">What I bring to every project.</h2>
+  <p class="section-body fade-up">I bring a diverse skill set to every project, blending technical proficiency with creative thinking.</p>
+  <div class="skills-grid fade-up">
+    <div class="skill-cell"><span class="skill-icon">◈</span><div class="skill-name">UI/UX Design</div><div class="skill-desc">User research, wireframing, prototyping, and high-fidelity design with Figma and Adobe XD.</div></div>
+    <div class="skill-cell"><span class="skill-icon">⌨</span><div class="skill-name">Web Development</div><div class="skill-desc">HTML, CSS (Sass/Tailwind), JavaScript, React, Vue — bridging design and engineering.</div></div>
+    <div class="skill-cell"><span class="skill-icon">◎</span><div class="skill-name">Branding</div><div class="skill-desc">Visual identity systems, typography, color, and brand strategy for early-stage products.</div></div>
+    <div class="skill-cell"><span class="skill-icon">⬡</span><div class="skill-name">Prototyping</div><div class="skill-desc">Interactive prototypes to validate ideas fast before committing to full development.</div></div>
+    <div class="skill-cell"><span class="skill-icon">◉</span><div class="skill-name">User Research</div><div class="skill-desc">Usability testing, user interviews, and data-driven iteration to improve real outcomes.</div></div>
+    <div class="skill-cell"><span class="skill-icon">⊞</span><div class="skill-name">Responsive Design</div><div class="skill-desc">Pixel-perfect layouts that work beautifully across every screen size and device.</div></div>
+  </div>
+  <div class="tech-row fade-up">
+    <span class="tech-tag">Figma</span><span class="tech-tag">Adobe XD</span><span class="tech-tag">React</span>
+    <span class="tech-tag">Vue.js</span><span class="tech-tag">Tailwind CSS</span><span class="tech-tag">Sass</span>
+    <span class="tech-tag">HTML5</span><span class="tech-tag">CSS3</span><span class="tech-tag">JavaScript</span>
+    <span class="tech-tag">WordPress</span><span class="tech-tag">User Research</span><span class="tech-tag">Prototyping</span>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-label fade-up">Achievements &amp; Recognition</div>
+  <h2 class="section-title fade-up">Notable accomplishments in design and development.</h2>
+  <div class="achievements-grid">
+    <div class="ach-card fade-up">
+      <span class="ach-icon">📚</span>
+      <div class="ach-title">Published Author</div>
+      <div class="ach-body">A published author with experience in Kindle Direct Publishing — bringing the same narrative clarity to design documentation and case studies.</div>
+    </div>
+    <div class="ach-card fade-up">
+      <span class="ach-icon">🎓</span>
+      <div class="ach-title">Industry Certifications</div>
+      <div class="ach-body">Holds an Adobe Design Certificate and IBM Professional Certification — validated credentials in design tools and professional practice.</div>
+    </div>
+    <div class="ach-card fade-up">
+      <span class="ach-icon">✍️</span>
+      <div class="ach-title">Technical Writer</div>
+      <div class="ach-body">Runs a technical writing blog and a literature blog — demonstrating the rare ability to communicate complex ideas clearly to any audience.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- RESUME -->
+<section id="resume">
+  <div class="resume-box fade-up">
+    <div class="section-label">Resume / CV</div>
+    <h2 class="section-title">Want the full picture?</h2>
+    <p class="section-body">Download my comprehensive resume to learn more about my professional experience, skills, and qualifications in UI/UX Design and Frontend Development.</p>
+    <a href="https://sooraj123kss.github.io/portfolio1/K%20S%20Sooraj%20CV%20graphic%20and%20UI%20UX.pdf" download class="btn-grad" style="margin-top:1.5rem;">⬇ Download Resume</a>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label fade-up">Featured Projects</div>
+  <h2 class="section-title fade-up">Selected work.</h2>
+  <p class="section-body fade-up">A showcase of my recent work, demonstrating my ability to execute complex concepts from idea to deployment.</p>
+
+  <div class="projects-grid">
+    <!-- FitTea -->
+    <div class="project-card fade-up">
+      <div class="proj-img-wrap mockup-fittea">
+        <div class="proj-mockup">
+          <img src="minimalbranding.png" alt="FitTea" style="width: 100%; height: 100%; object-fit: cover; object-position: center;" />
+        </div>
+        <div class="proj-overlay">
+          <a href="https://www.behance.net/gallery/236061255/FitTea-Tea-that-work-as-much-as-you-do" target="_blank" class="proj-overlay-btn">View on Behance</a>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tag">Brand Identity · UI Design</div>
+        <div class="proj-title">FitTea — Minimalist Brand Identity</div>
+        <div class="proj-desc">A modern, minimalistic brand identity for a wellness tea startup. Communicates natural quality through clean typography, earthy tones, and purposeful negative space.</div>
+        <div class="proj-meta"><span class="proj-pill">Figma</span><span class="proj-pill">Branding</span><span class="proj-pill">UI Design</span></div>
+        <a href="https://www.behance.net/gallery/236061255/FitTea-Tea-that-work-as-much-as-you-do" target="_blank" class="proj-link">View Live →</a>
+      </div>
+    </div>
+
+    <!-- E-Commerce -->
+    <div class="project-card fade-up">
+      <div class="proj-img-wrap mockup-ecom">
+        <div class="proj-mockup">
+          <img src="skart.png" alt="E-Commerce" style="width: 100%; height: 100%; object-fit: cover; object-position: center;" />
+        </div>
+        <div class="proj-overlay">
+          <a href="https://sooraj123kss.github.io/soorajweb/ecom.html" target="_blank" class="proj-overlay-btn">View Live</a>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tag">E-Commerce · Frontend Dev</div>
+        <div class="proj-title">Interactive E-Commerce Application</div>
+        <div class="proj-desc">An end-to-end e-commerce UI with bold product visuals and deep, intuitive navigation. Built with conversion-focused layout patterns and full mobile responsiveness.</div>
+        <div class="proj-meta"><span class="proj-pill">HTML/CSS/JS</span><span class="proj-pill">UI Design</span><span class="proj-pill">Live</span></div>
+        <a href="https://sooraj123kss.github.io/soorajweb/ecom.html" target="_blank" class="proj-link">View Live →</a>
+      </div>
+    </div>
+
+    <!-- Premia -->
+    <div class="project-card fade-up">
+      <div class="proj-img-wrap mockup-premia">
+        <div class="proj-mockup">
+          <img src="Premia.png" alt="Premia" style="width: 100%; height: 100%; object-fit: cover; object-position: center;" />
+        </div>
+        <div class="proj-overlay">
+          <a href="https://www.behance.net/gallery/221714177/Premia-luxury-pens-and-watches-case-study" target="_blank" class="proj-overlay-btn">View Case Study</a>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tag">App Design · Figma · Case Study</div>
+        <div class="proj-title">Premia — Luxury Stationery App</div>
+        <div class="proj-desc">A Figma app design for Premia, a hypothetical luxury pen and watch brand. Dark editorial aesthetics with gold accents — full case study documented on Behance.</div>
+        <div class="proj-meta"><span class="proj-pill">Figma</span><span class="proj-pill">App Design</span><span class="proj-pill">Case Study</span></div>
+        <a href="https://www.behance.net/gallery/221714177/Premia-luxury-pens-and-watches-case-study" target="_blank" class="proj-link">View Live →</a>
+      </div>
+    </div>
+
+    <!-- WordPress -->
+    <div class="project-card fade-up">
+      <div class="proj-img-wrap mockup-wp">
+        <div class="proj-mockup">
+          <img src="wordpress.png" alt="WordPress" style="width: 100%; height: 100%; object-fit: cover; object-position: center;" />
+        </div>
+        <div class="proj-overlay">
+          <a href="https://soorajuxui.wordpress.com/" target="_blank" class="proj-overlay-btn">View Live</a>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tag">Web Design · WordPress</div>
+        <div class="proj-title">Minimal WordPress Design</div>
+        <div class="proj-desc">A WordPress blog inspired by classic literature — simplicity on the outside, rich storytelling within. Typography-first reading experience with clean editorial layout.</div>
+        <div class="proj-meta"><span class="proj-pill">WordPress</span><span class="proj-pill">Editorial Design</span><span class="proj-pill">Live</span></div>
+        <a href="https://soorajuxui.wordpress.com/" target="_blank" class="proj-link">View Live →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label fade-up">Get In Touch</div>
+  <h2 class="section-title fade-up">Let's work together.</h2>
+  <div class="contact-grid">
+    <div class="fade-up">
+      <div class="avail-badge"><span class="avail-dot"></span>Available for opportunities</div>
+      <p class="contact-info-body">I am currently open to new opportunities and collaborations. Feel free to reach out!</p>
+      <div class="contact-links">
+        <a href="mailto:diya_sooraj22@outlook.com" class="contact-link"><span class="contact-link-icon">✉</span>diya_sooraj22@outlook.com</a>
+        <a href="https://www.linkedin.com/in/k-s-sooraj-39aa17249" target="_blank" class="contact-link"><span class="contact-link-icon">in</span>K S Sooraj on LinkedIn</a>
+        <a href="https://www.behance.net/kssooraj1" target="_blank" class="contact-link"><span class="contact-link-icon">Be</span>Behance Portfolio</a>
+      </div>
+    </div>
+    <div class="contact-form fade-up">
+      <div class="form-group"><label class="form-label" for="name">Name</label><input class="form-input" type="text" id="name" placeholder="Your name"/></div>
+      <div class="form-group"><label class="form-label" for="email">Email</label><input class="form-input" type="email" id="email" placeholder="your@email.com"/></div>
+      <div class="form-group"><label class="form-label" for="msg">Message</label><textarea class="form-textarea" id="msg" rows="5" placeholder="Tell me about your project..."></textarea></div>
+      <button class="form-submit" onclick="alert('Message sent! I\'ll be in touch soon.')">Send Message</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2024 K S Sooraj. All rights reserved.</span>
+  <span>UI/UX Designer &amp; Frontend Developer</span>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 70);
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
